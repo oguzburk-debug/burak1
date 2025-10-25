@@ -1,0 +1,254 @@
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Rocket, Crown, Zap, TrendingUp, Globe, Star } from 'lucide-react';
+
+const BrandElevationSlider = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const elevationSteps = [
+  {
+    title: 'Yeni Üye Karşılama',
+    subtitle: 'İlk Etkiyi Yaratın',
+    description: 'Yeni üyelerinizin markanızla ilk temasında unutulmaz bir deneyim yaşamalarını sağlıyoruz',
+    icon: Globe,
+    gradient: 'from-blue-500 to-cyan-500',
+    features: [
+      'Kişiye özel karşılama mesajları',
+      'Hoş geldin e-postaları',
+      'Hediye veya teşvik kampanyaları',
+      'Kayıt sonrası yönlendirme'
+    ],
+    image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600',
+    metric: 'İlk 7 Gün',
+    result: 'Memnuniyet Başlangıcı'
+  },
+  {
+    title: 'İlk Alışveriş Teşvik',
+    subtitle: 'Satışı Hızlandırın',
+    description: 'İlk alışverişleri için müşterilerinizi teşvik ederek dönüşüm oranlarını artırıyoruz',
+    icon: TrendingUp,
+    gradient: 'from-green-500 to-emerald-500',
+    features: [
+      'Özel indirim ve kupon gönderimi',
+      'Hedefli kampanya duyuruları',
+      'Terk edilmiş sepet hatırlatmaları',
+      'Satın alma motivasyon içerikleri'
+    ],
+    image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=600',
+    metric: 'İlk 1 Ay',
+    result: 'Artan Satış'
+  },
+  {
+    title: 'Doğum Günü Tebriği',
+    subtitle: 'Müşteri Sadakatini Artırın',
+    description: 'Özel günlerde müşterilerinize kişisel mesajlar göndererek sadakati güçlendiriyoruz',
+    icon: Crown,
+    gradient: 'from-purple-500 to-indigo-500',
+    features: [
+      'Kişiye özel kutlama mesajları',
+      'Doğum günü indirimleri',
+      'Özel kampanya hatırlatmaları',
+      'Marka bağlılığı artırıcı içerikler'
+    ],
+    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600',
+    metric: 'Yılda 1 Kez',
+    result: 'Sadakat Artışı'
+  },
+  {
+    title: 'Sepet Kurtarma',
+    subtitle: 'Terk Edilen Sepetleri Kazanın',
+    description: 'Terk edilen sepetleri geri kazanarak satış kaybını minimuma indiriyoruz',
+    icon: Rocket,
+    gradient: 'from-orange-500 to-red-500',
+    features: [
+      'Terk edilen sepet hatırlatmaları',
+      'Özel indirim veya kupon teklifleri',
+      'Hedefli e-posta ve push bildirimleri',
+      'Satın alma dönüşüm optimizasyonu'
+    ],
+    image: 'https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=600',
+    metric: 'İlk 7 Gün',
+    result: 'Satış Geri Kazanımı'
+  }
+];
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % elevationSteps.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, elevationSteps.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % elevationSteps.length);
+    setIsAutoPlaying(false);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + elevationSteps.length) % elevationSteps.length);
+    setIsAutoPlaying(false);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setIsAutoPlaying(false);
+  };
+
+  const currentStep = elevationSteps[currentSlide];
+  const Icon = currentStep.icon;
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Markanızı <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Zirveye</span> Taşıyoruz
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            4 adımda dijital dünyada liderlik konumuna ulaşın
+          </p>
+        </div>
+
+        <div className="relative">
+          {/* Main Content Card */}
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Content Side */}
+              <div className="p-12 text-white">
+                <div className="flex items-center mb-6">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${currentStep.gradient} flex items-center justify-center mr-4`}>
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-300 uppercase tracking-wide">
+                      Adım {currentSlide + 1}
+                    </div>
+                    <h3 className="text-3xl font-bold">{currentStep.title}</h3>
+                  </div>
+                </div>
+
+                <div className={`inline-block bg-gradient-to-r ${currentStep.gradient} text-white px-4 py-2 rounded-full text-sm font-medium mb-6`}>
+                  {currentStep.subtitle}
+                </div>
+
+                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                  {currentStep.description}
+                </p>
+
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold mb-4">Bu Aşamada Yapılanlar:</h4>
+                  <ul className="space-y-3">
+                    {currentStep.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <Star className="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <div className="text-sm font-medium text-gray-400 mb-1">Süre</div>
+                    <div className="text-lg font-semibold">{currentStep.metric}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-gray-400 mb-1">Sonuç</div>
+                    <div className="text-lg font-semibold">{currentStep.result}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Visual Side */}
+              <div className="relative">
+                <img
+                  src={currentStep.image}
+                  alt={currentStep.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-r ${currentStep.gradient} opacity-30`}></div>
+                
+                {/* Floating Achievement Badge */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center">
+                    <div className={`text-3xl font-bold bg-gradient-to-r ${currentStep.gradient} bg-clip-text text-transparent mb-2`}>
+                      {currentStep.result}
+                    </div>
+                    <div className="text-sm text-gray-600">Hedeflenen Sonuç</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-10"
+          >
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-10"
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
+        {/* Step Navigation */}
+        <div className="flex justify-center items-center space-x-4 mt-12">
+          {elevationSteps.map((step, index) => {
+            const StepIcon = step.icon;
+            return (
+              <div key={index} className="flex items-center">
+                <button
+                  onClick={() => goToSlide(index)}
+                  className={`relative p-4 rounded-2xl transition-all duration-300 ${
+                    index === currentSlide
+                      ? `bg-gradient-to-r ${step.gradient} text-white shadow-lg scale-110`
+                      : 'bg-white/10 text-gray-400 hover:text-white hover:bg-white/20'
+                  }`}
+                >
+                  <StepIcon className="w-6 h-6" />
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-medium text-white whitespace-nowrap">
+                    Adım {index + 1}
+                  </div>
+                </button>
+                {index < elevationSteps.length - 1 && (
+                  <div className={`w-12 h-1 mx-2 rounded-full transition-all duration-500 ${
+                    index < currentSlide ? `bg-gradient-to-r ${elevationSteps[index].gradient}` : 'bg-white/20'
+                  }`}></div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Progress Indicator */}
+        <div className="mt-8 max-w-md mx-auto">
+          <div className="flex justify-between text-sm text-gray-300 mb-2">
+            <span>Dijital Dönüşüm Yolculuğu</span>
+            <span>{currentSlide + 1} / {elevationSteps.length}</span>
+          </div>
+          <div className="w-full bg-white/20 rounded-full h-2">
+            <div
+              className={`h-2 rounded-full bg-gradient-to-r ${currentStep.gradient} transition-all duration-500`}
+              style={{ width: `${((currentSlide + 1) / elevationSteps.length) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default BrandElevationSlider;
